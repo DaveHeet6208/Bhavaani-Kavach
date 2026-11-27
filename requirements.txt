@@ -1,0 +1,11 @@
+flet
+opencv-python
+numpy
+sounddevice
+vosk
+ultralytics
+bleak
+scikit-learn
+matplotlib
+pandas
+seaborn

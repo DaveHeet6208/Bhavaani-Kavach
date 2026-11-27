@@ -1,0 +1,25 @@
+# Personal & sensitive configuration
+user_profile.json
+.env
+
+# Runtime evidence & media
+training_data/
+*.jpg
+!confusion_matrix.png
+*.avi
+*.mp4
+
+# Large offline speech model (download via README instructions)
+model/
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+
+# Unrelated local workspace files
+DADDY/
+IIT Bombay/
+Keval Mama/
+Road_mapping/
+flower_platform.db

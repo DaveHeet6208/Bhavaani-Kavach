@@ -20,8 +20,8 @@ class BhavaaniBLEBridge:
     payload_str = data.decode("utf-8")
     print("\n[BLE HARDWARE INTERCEPT] Received packet from Locket!")
 
-    # Execute the full app pipeline using real hardware trigger
-    self.master_system.execute_full_pipeline(payload_str)
+    # Execute the full app pipeline using real hardware trigger, but route it through the Fusion Engine filter first
+    self.master_system.process_ble_stream(payload_str)
 
   async def run_ble_listener(self):
     print("========================================================")

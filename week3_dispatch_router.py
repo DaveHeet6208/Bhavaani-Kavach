@@ -40,7 +40,7 @@ class EmergencyDispatchRouter:
 
         # 2. Build Multi-part Email
         msg = MIMEMultipart()
-        msg['Subject'] = f"🚨 URGENT: BHAVAANI KAVACH CRITICAL ALERT [{payload['timestamp']}]"
+        msg['Subject'] = f"!!! URGENT: BHAVAANI KAVACH CRITICAL ALERT [{payload['timestamp']}]"
         msg['From'] = self.sender_email
         msg['To'] = self.emergency_contact_email
 
@@ -63,6 +63,23 @@ class EmergencyDispatchRouter:
         # 4. Attach Full-Color Image
         img_attachment = MIMEImage(buffer.tobytes(), name="evidence_capture.jpg")
         msg.attach(img_attachment)
+        
+        # --- DATASET GATHERING ARCHITECTURE ---
+        # Save a copy to the hard drive so the user can see it AND build a training dataset!
+        import os, json
+        os.makedirs("training_data", exist_ok=True)
+        timestamp = payload.get("timestamp", "latest")
+        
+        # Save Image
+        img_path = os.path.join("training_data", f"evidence_{timestamp}.jpg")
+        with open(img_path, "wb") as f:
+            f.write(buffer.tobytes())
+            
+        # Save Metadata (Labels/Coordinates)
+        meta_path = os.path.join("training_data", f"metadata_{timestamp}.json")
+        with open(meta_path, "w") as f:
+            json.dump(payload, f, indent=4)
+        # --------------------------------------
 
         # 5. Execute Transmission (Simulated / Live)
         print(f" -> [DISPATCH SUCCESS] Emergency payload & image ready for transmission to {self.emergency_contact_email}")
@@ -101,7 +118,7 @@ def run_week3_pipeline():
                 "device_id": "BHAVAANI_KAVACH_001",
                 "timestamp": time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime()),
                 "motion_score": 14250.0,
-                "location": {"latitude": 22.5645, "longitude": 71.8214}
+                "location": {"latitude": 21.5222, "longitude": 70.4579}
             }
             
             # Step 3: Route Email/SMS Dispatch with Image Attachment

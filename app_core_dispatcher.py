@@ -32,7 +32,7 @@ class BhavaaniMobileAppEngine:
 
         # Step 3: Construct personalized emergency message
         sms_text = (
-            f"🚨 EMERGENCY ALERT! 🚨\n"
+            f"!!! EMERGENCY ALERT !!!\n"
             f"User: {profile['user_name']}\n"
             f"Bhavaani Kavach Locket Triggered!\n"
             f"Motion Anomaly Score: {data.get('motion_score')}\n"
